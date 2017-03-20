@@ -1,0 +1,16 @@
+<h1>Welcome <%= @user.username %>!</h1>
+<% if !@user.projects.empty? %>
+<h2>Your Current Projects</h2>
+  <ol>
+    <% @user.projects.each do |project| %>
+      <li><a href="/<%= project.slug %>"><%= project.name %></a></li>
+    <% end %>
+  </ol>
+  <br>
+  <h3><a href="/projects/new">Click to Make One</a></h3>
+  <br>
+  <a href="/logout">Logout</a>
+<% else %>
+  <h3>There are no projects.  <a href="/projects/new">Click to Make One</a></h3>
+  <a href="/logout">Logout</a>
+<% end %>

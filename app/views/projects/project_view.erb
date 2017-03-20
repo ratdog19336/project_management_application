@@ -1,0 +1,23 @@
+<h1><%= @project.name %></h1>
+<% if !@project.notes.empty? %>
+<h2>Your Project Notes</h2>
+  <ol>
+    <% @project.notes.each do |note| %>
+      <li><a href="/<%= @project.slug %>/notes/<%= note.id %>"><%= note.name %></a></li>
+    <% end %>
+  </ol>
+  <br>
+  <h3><a href="/<%= @project.slug %>/notes/new">Make a New Note</a></h3>
+  <a href="/<%= @project.slug %>/edit">Edit Your Project</a><br><br>
+
+  <form action="/<%= @project.slug%>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input id="hidden" type="hidden" name="note_id" value="<%= @project.slug %>">
+    <input id="submit" type="submit" name="" value="Delete Project">
+  </form>
+<br>
+  <a href="/home">Back</a>
+<% else %>
+  <h3>There are no notes for this Project. <br><br> <a href="/<%= @project.slug %>/notes/new">Click to Make One</a></h3>
+  <a href="/home">Back</a>
+<% end %>

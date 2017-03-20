@@ -1,0 +1,6 @@
+<h2>Edit this Note</h2>
+<form action="/<%= @note.project.slug %>/notes/<%= @note.id %>" method="post">
+  <input type="text" name="name" placeholder="Name" value="<%= @note.name %>"><br>
+  <input type="text" name="content" placeholder="Content" value="<%= @note.content %>">
+  <input type="submit" name="sumbit" value="Edit">
+</form>

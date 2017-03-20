@@ -1,0 +1,6 @@
+<h2>Please Create a New Note</h2>
+<form action="/<%= @project.slug %>/notes/new" method="post">
+  <input type="text" name="name" placeholder="Name" value=""><br>
+  <input type="text" name="content" placeholder="Content" value="">
+  <input type="submit" name="sumbit" value="Create">
+</form>

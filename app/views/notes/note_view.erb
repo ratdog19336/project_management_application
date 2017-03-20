@@ -1,0 +1,15 @@
+<h3><%= @note.project.name %></h3>
+<h2><%= @note.name %></h2>
+<p>
+  <%= @note.content %>
+</p>
+<a href="/<%= @note.project.slug%>/notes/<%= @note.id %>/edit">Edit This Note</a>
+<br>
+<br>
+<form action="/<%= @note.project.slug%>/notes/<%= @note.id %>/delete" method="post">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+  <input id="hidden" type="hidden" name="note_id" value="<%= @note.id %>">
+  <input id="submit" type="submit" name="" value="Delete Note">
+</form>
+<br><br>
+<a href="/<%= @note.project.slug %>">Back</a>

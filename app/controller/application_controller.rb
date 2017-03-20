@@ -11,15 +11,16 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
+    session.clear
     erb :index
   end
 
   get '/signup' do
     if logged_in?
       @user = current_user
-      redirect "/__________"
+      redirect "/users/home"
     else
-      erb :signup
+      erb :'/home/signup'
     end
   end
 
@@ -27,14 +28,14 @@ class ApplicationController < Sinatra::Base
     if User.find_by(username: params[:username]) != nil
       @user = User.find_by(username: params[:username])
       session[:id] = @user.id
-      redirect "/tweets"
+      redirect "/home"
     elsif logged_in?
       @user = current_user
-      redirect "/tweets"
-    elsif params[:username] != "" && params[:email] != "" && params[:password] != "" && !logged_in?
-      @user = User.create(username: params[:username], email: params[:email], password: params[:password])
-      session[:user_id] = @user.id
-      redirect "/tweets"
+      redirect "/home"
+    elsif params[:username] != "" && params[:password] != ""
+      @user = User.create(username: params[:username], password: params[:password])
+      session[:id] = @user.id
+      redirect "/home"
     else
       redirect "/signup"
     end
@@ -43,9 +44,9 @@ class ApplicationController < Sinatra::Base
   get "/login" do
     if logged_in?
       @user = current_user
-      redirect "/tweets"
+      redirect "/home"
     else
-      erb :'/users/login'
+      erb :'/home/login'
     end
   end
 
@@ -54,7 +55,7 @@ class ApplicationController < Sinatra::Base
     if @user && @user.authenticate(params[:password])
       @user = User.find_by(:username => params[:username])
       session[:id] = @user.id
-      redirect "/tweets"
+      redirect "/home"
     else
       redirect "/failure"
     end

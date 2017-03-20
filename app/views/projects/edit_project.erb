@@ -1,0 +1,5 @@
+<h2>Edit your Current Project</h2>
+<form action="/<%= @project.slug %>" method="post">
+  <input type="text" name="name" placeholder="name" value="<%= @project.name %>">
+  <input type="submit" name="sumbit" value="Edit this Project">
+</form>
